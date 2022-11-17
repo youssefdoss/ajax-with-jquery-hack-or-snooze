@@ -61,10 +61,13 @@ async function submitNewStoryAndAddToPage(evt) {
   const title = $("#addstory-title").val();
   const url = $("#addstory-url").val();
 
-  await storyList.addStory(currentUser,{author, title, url})
-  
-  putStoriesOnPage();
+  const story = await storyList.addStory(currentUser,{author, title, url})
+  const $story = generateStoryMarkup(story);
+  $allStoriesList.prepend($story).show();
   $submitForm.hide();
 }
 
 $submitForm.on("submit", submitNewStoryAndAddToPage);
+
+
+// Problem: need refresh to include submitted story
