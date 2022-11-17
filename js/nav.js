@@ -41,7 +41,7 @@ function updateNavOnLogin() {
 
 /** When a user clicks submit link go to addstory form*/
 
-function updateSubmitClick() {
+function updateSubmitClick() { // TODO rename
   console.debug("updateSubmitClick");
   $(".main-nav-links").show();
   hidePageComponents();
