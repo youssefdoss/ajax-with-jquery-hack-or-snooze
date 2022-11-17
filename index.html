@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Hack or Snooze</title>
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
         href="https://www.unpkg.com/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/user.css">
@@ -33,6 +33,10 @@
 <nav>
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
+
+  </div>
+  <div class="nav">
+    <a class="nav-link" href="#" id="nav-submit">submit</a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -87,6 +91,29 @@
     </div>
     <button type="submit">create account</button>
   </form>
+</section>
+
+<section class="addstory-forms-container container"> <!--TODO: CSS-->
+
+
+  <!-- addstory form -->
+  <form id="addstory-form" class="account-form hidden"> <!--TODO: CSS-->
+    <div class="addstory-input">
+      <label for="addstory-author">Author</label>
+      <input id="addstory-author" type="text" placeholder="author name">
+    </div>
+    <div class="addstory-input">
+      <label for="addstory-title">Title</label>
+      <input id="addstory-title" type="text" placeholder="story title">
+    </div>
+    <div class="addstory-input">
+      <label for="addstory-url">URL</label>
+      <input id="addstory-url" type="text" placeholder="story url">
+    </div>
+    <button type="submit">submit</button>
+    <hr>
+  </form>
+
 </section>
 
 <!-- Library JS & our JS -->

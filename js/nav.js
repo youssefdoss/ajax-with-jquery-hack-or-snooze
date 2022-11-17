@@ -36,3 +36,16 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+
+
+/** When a user clicks submit link go to addstory form*/
+
+function updateSubmitClick() {
+  console.debug("updateSubmitClick");
+  $(".main-nav-links").show();
+  hidePageComponents();
+  $submitForm.show();
+}
+
+$navSubmit.on("click", updateSubmitClick);
