@@ -12,6 +12,12 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
+/** TODO: */
+
+function isStoryFavorite(story) {
+  return currentUser.favorites.includes(story);
+}
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -23,8 +29,13 @@ function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
   const hostName = story.getHostName();
+
+  const filledOrNot = isStoryFavorite(story) ? '-filled': ''
   return $(`
       <li id="${story.storyId}">
+        <a href="#" class="favorite-button">
+          <i class="bi bi-star${filledOrNot}"></i>
+        </a>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -69,5 +80,35 @@ async function submitNewStoryAndAddToPage(evt) {
 
 $submitForm.on("submit", submitNewStoryAndAddToPage);
 
+/** TODO: */
 
-// Problem: need refresh to include submitted story
+function generateFavoriteStoryMarkup() {
+  console.debug("putFavoriteStoriesOnPage");
+
+  $favoriteStoriesList.empty();
+
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $favoriteStoriesList.append($story);
+  }
+}
+
+async function handleFavoriteToggle(evt) {
+  const currStoryId = $(evt.target).parent().getAttribute("id");
+  let currStory;
+
+  for (let story of storyList.stories) {
+    if (story.storyId = currStoryId) {
+      currStory = story;
+    }
+  }
+
+  if (isStoryFavorite(story)) {
+    await currentUser.addStory(story);
+  } else {
+    await currentUser.removeFavorite(story);
+  }
+}
+
+$favoriteButton.on("click", handleFavoriteToggle);
+

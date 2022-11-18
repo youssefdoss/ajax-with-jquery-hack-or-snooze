@@ -37,6 +37,7 @@
   </div>
   <div class="nav">
     <a class="nav-link" href="#" id="nav-submit">submit</a>
+    <a class="nav-link" href="#" id="nav-favorites">favorites</a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -44,6 +45,29 @@
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
+
+<section class="addstory-forms-container container"> <!--TODO: CSS-->
+
+
+  <!-- addstory form -->
+  <form id="addstory-form" class="account-form hidden"> <!--TODO: CSS-->
+    <div class="addstory-input">
+      <label for="addstory-author">Author</label>
+      <input id="addstory-author" type="text" placeholder="author name">
+    </div>
+    <div class="addstory-input">
+      <label for="addstory-title">Title</label>
+      <input id="addstory-title" type="text" placeholder="story title">
+    </div>
+    <div class="addstory-input">
+      <label for="addstory-url">URL</label>
+      <input id="addstory-url" type="text" placeholder="story url">
+    </div>
+    <button type="submit">submit</button>
+    <hr>
+  </form>
+
+</section>
 
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
@@ -53,6 +77,9 @@
 
   <!-- List of all stories -->
   <ol id="all-stories-list" class="stories-list"></ol>
+
+  <!-- List of all favorited stories -->
+  <ol id="favorited-stories-list" class="hidden stories-list" display="hidden"></ol>
 
 </section>
 
@@ -93,28 +120,7 @@
   </form>
 </section>
 
-<section class="addstory-forms-container container"> <!--TODO: CSS-->
 
-
-  <!-- addstory form -->
-  <form id="addstory-form" class="account-form hidden"> <!--TODO: CSS-->
-    <div class="addstory-input">
-      <label for="addstory-author">Author</label>
-      <input id="addstory-author" type="text" placeholder="author name">
-    </div>
-    <div class="addstory-input">
-      <label for="addstory-title">Title</label>
-      <input id="addstory-title" type="text" placeholder="story title">
-    </div>
-    <div class="addstory-input">
-      <label for="addstory-url">URL</label>
-      <input id="addstory-url" type="text" placeholder="story url">
-    </div>
-    <button type="submit">submit</button>
-    <hr>
-  </form>
-
-</section>
 
 <!-- Library JS & our JS -->
 <script src="https://unpkg.com/jquery"></script>

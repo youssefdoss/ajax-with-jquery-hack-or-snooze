@@ -24,8 +24,8 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-
-    return "hostname.com";
+    const url = new URL(this.url);
+    return url.host;
   }
 }
 
@@ -73,7 +73,7 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory(user, newStory) { // TODO add made to story to story list
+  async addStory(user, newStory) {
     const response = await axios({
       url: `${BASE_URL}/stories`,
       method: "POST",
@@ -200,5 +200,29 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
+  }
+
+  /** TODO: */
+
+  async addFavorite(story) {
+    this.favorites.push(story);
+    await this.addOrRemoveFavoriteInApi(story, "POST");
+  }
+
+  /** TODO: */
+  async removeFavorite(story) {
+    this.favorites = this.favorites.filter((storyVal) => {
+      storyVal.storyId !== story.storyId;
+    });
+    await this.addOrRemoveFavoriteInApi(story, "DELETE");
+  }
+
+  /** TODO: */
+  async addOrRemoveFavoriteInApi(story, method) {
+    const response = await axios({
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+      method: method,
+      params: {token: this.loginToken}
+    });
   }
 }

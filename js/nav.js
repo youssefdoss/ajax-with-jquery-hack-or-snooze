@@ -41,11 +41,22 @@ function updateNavOnLogin() {
 
 /** When a user clicks submit link go to addstory form*/
 
-function updateSubmitClick() { // TODO rename
-  console.debug("updateSubmitClick");
+function navSubmitClick() {
+  console.debug("navSubmitClick");
   $(".main-nav-links").show();
-  hidePageComponents();
   $submitForm.show();
 }
 
-$navSubmit.on("click", updateSubmitClick);
+$navSubmit.on("click", navSubmitClick);
+
+/** TODO: */
+
+function navFavoritesClick() {
+  console.debug("navFavoritesClick");
+  generateFavoriteStoryMarkup();
+  hidePageComponents();
+  $(".main-nav-links").show();
+  $favoriteStoriesList.show();
+}
+
+$navFavorites.on("click", navFavoritesClick);
