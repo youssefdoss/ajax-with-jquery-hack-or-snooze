@@ -22,13 +22,17 @@ class Story {
   }
 
   /** Parses hostname out of URL and returns it. */
-
+// can just return the variable.host TODO:
   getHostName() {
     const url = new URL(this.url);
     return url.host;
   }
 
-  /** TODO: */
+  /** Gets a story from the API by its ID and returns that story as
+   * an instance of the class story
+   * 
+   * storyId: string
+   */
   static async getStoryById(storyId) {
     const response = await axios({
       url: `${BASE_URL}/stories/${storyId}`,
@@ -212,14 +216,20 @@ class User {
     }
   }
 
-  /** TODO: */
-
+  /** Adds story to the API user favorites data and local favorites
+   * 
+   * story: instance of class story
+   */
+  // TODO: can make add the default in addOrRemoveFavoriteInApi
   async addFavorite(story) {
     this.favorites.push(story);
     await this.addOrRemoveFavoriteInApi(story, "POST");
   }
 
-  /** TODO: */
+  /** Removes story from API user favorites data and local favorites 
+   * 
+   * story: instance of class story
+  */
   async removeFavorite(story) {
     console.log("224", this.favorites);
     this.favorites = this.favorites.filter(favorite => favorite.storyId !== story.storyId);
@@ -227,7 +237,12 @@ class User {
     await this.addOrRemoveFavoriteInApi(story, "DELETE");
   }
 
-  /** TODO: */
+  /** Adds or removes API favorite designation for given story
+   * 
+   * story: instance of class story
+   * method: string
+   */
+  // TODO: prefix this function with an underscore because only other methods call it
   async addOrRemoveFavoriteInApi(story, method) {
     const response = await axios({
       url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
@@ -235,8 +250,11 @@ class User {
       params: {token: this.loginToken}
     });
   }
-
-  /** TODO: */
+// TODO: tell the return value (true false in this case)
+  /** Determines if a story is a favorite of the user
+   * 
+   * story: instance of class story
+   */
   isStoryFavorite(story) {
     return this.favorites.some(favorite => favorite.storyId === story.storyId);
   }

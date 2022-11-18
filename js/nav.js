@@ -49,7 +49,7 @@ function navSubmitClick() {
 
 $navSubmit.on("click", navSubmitClick);
 
-/** TODO: */
+/** When a user clicks favorites, go to favorites page */
 
 function navFavoritesClick() {
   console.debug("navFavoritesClick");
@@ -60,3 +60,6 @@ function navFavoritesClick() {
 }
 
 $navFavorites.on("click", navFavoritesClick);
+
+
+// TODO: when logged out you have to hide submit and favorites

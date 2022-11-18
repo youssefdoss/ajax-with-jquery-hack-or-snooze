@@ -18,7 +18,9 @@ async function getAndShowStoriesOnStart() {
  *
  * Returns the markup for the story.
  */
-
+// TODO: check if user exists before doing the piece on 27
+// TODO: lift the star generating into another function 
+// Have this function determine whether or not there is a user and if so, call the star function
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
@@ -57,7 +59,9 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-/** TODO: */
+/** Adds new story to user in the API, generates the story markup, and adds
+ * to the story page
+ */
 
 async function submitNewStoryAndAddToPage(evt) {
   console.debug("Submit story", evt);
@@ -75,15 +79,14 @@ async function submitNewStoryAndAddToPage(evt) {
 
 $submitForm.on("submit", submitNewStoryAndAddToPage);
 
-/** TODO: */
-
+/** Generates the markup for the current user's favorited stories */
+// TODO: putFavoriteStoriesOnPage is better name to be more in line
 function generateFavoriteStoryMarkup() {
   console.debug("putFavoriteStoriesOnPage");
 
   $favoriteStoriesList.empty();
 
   for (let story of currentUser.favorites) {
-    console.log(currentUser.favorites);
     const $story = generateStoryMarkup(story);
     $favoriteStoriesList.append($story);
   }
@@ -91,14 +94,19 @@ function generateFavoriteStoryMarkup() {
   $favoriteStoriesList.show();
 }
 
-/** TODO: */
+/** Handles the user toggling favorites on stories
+ * If the story is a favorite, it removes the favorite from the API and local data and updates UI.
+ * If not, it adds the favorite from the API and local data and updates the UI.
+ * 
+ * evt: HTML element
+ */
 async function handleFavoriteToggle(evt) {
   console.debug("handleFavoriteToggle");
   const $target = $(evt.target);
   const currStoryId = $target.closest("li").attr("id");
 
   const currStory = await Story.getStoryById(currStoryId);
-
+  // TODO: toggle class instead of add and remove
   if (currentUser.isStoryFavorite(currStory)) {
     $target.removeClass("bi bi-star-fill")
     $target.addClass("bi bi-star");
