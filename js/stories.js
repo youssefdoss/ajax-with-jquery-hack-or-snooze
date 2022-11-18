@@ -12,12 +12,6 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
-/** TODO: */
-
-function isStoryFavorite(story) {
-  return currentUser.favorites.includes(story);
-}
-
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -30,10 +24,12 @@ function generateStoryMarkup(story) {
 
   const hostName = story.getHostName();
 
+  const filled = currentUser.isStoryFavorite(story) ? "-filled" : "";
+
   return $(`
       <li id="${story.storyId}">
         <a href="#" class="favorite-button">
-          <i class="bi bi-star"></i>
+          <i class="bi bi-star${filled}"></i>
         </a>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -97,11 +93,11 @@ async function handleFavoriteToggle(evt) {
   console.debug("handleFavoriteToggle");
   const $target = $(evt.target);
   const currStoryId = $target.closest("li").attr("id");
-  console.log(currStoryId);
-  const currStory = await Story.getStoryById(currStoryId);
-  console.log(currStory);
 
-  if (isStoryFavorite(currStory)) {
+  const currStory = await Story.getStoryById(currStoryId);
+
+
+  if (currentUser.isStoryFavorite(currStory)) {
     $target.toggleClass("bi bi-star");
     await currentUser.removeFavorite(currStory);
   } else {

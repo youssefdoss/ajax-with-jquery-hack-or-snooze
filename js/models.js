@@ -233,6 +233,17 @@ class User {
       url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
       method: method,
       params: {token: this.loginToken}
+
+
     });
+
+  }
+
+  /** TODO: */
+  isStoryFavorite(story) {
+    const storyId =
+
+    this.favorites.some()
+    return this.favorites.includes(story);
   }
 }
