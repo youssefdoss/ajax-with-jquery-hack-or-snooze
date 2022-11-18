@@ -221,9 +221,9 @@ class User {
 
   /** TODO: */
   async removeFavorite(story) {
-    this.favorites = this.favorites.filter((favorite) => {
-      favorite.storyId !== story.storyId;
-    });
+    console.log("224", this.favorites);
+    this.favorites = this.favorites.filter(favorite => favorite.storyId !== story.storyId);
+    console.log("226", this.favorites);
     await this.addOrRemoveFavoriteInApi(story, "DELETE");
   }
 
@@ -233,10 +233,7 @@ class User {
       url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
       method: method,
       params: {token: this.loginToken}
-
-
     });
-
   }
 
   /** TODO: */

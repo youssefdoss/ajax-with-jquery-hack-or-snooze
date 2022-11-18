@@ -99,7 +99,6 @@ async function handleFavoriteToggle(evt) {
 
   const currStory = await Story.getStoryById(currStoryId);
 
-
   if (currentUser.isStoryFavorite(currStory)) {
     $target.removeClass("bi bi-star-fill")
     $target.addClass("bi bi-star");
@@ -112,4 +111,5 @@ async function handleFavoriteToggle(evt) {
 }
 
 $allStoriesList.on("click", ".favorite-button", handleFavoriteToggle);
+$favoriteStoriesList.on("click", ".favorite-button", handleFavoriteToggle);
 
