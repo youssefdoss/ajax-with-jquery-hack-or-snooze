@@ -27,9 +27,15 @@ class Story {
     const url = new URL(this.url);
     return url.host;
   }
-  /** TODO: */
-  static getStoryId(story) {
 
+  /** TODO: */
+  static async getStoryById(storyId) {
+    const response = await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "GET",
+    });
+
+    return new Story(response.data.story);
   }
 }
 

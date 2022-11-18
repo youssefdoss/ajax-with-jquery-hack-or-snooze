@@ -97,23 +97,18 @@ async function handleFavoriteToggle(evt) {
   console.debug("handleFavoriteToggle");
   const $target = $(evt.target);
   const currStoryId = $target.closest("li").attr("id");
-  let currStory;
+  console.log(currStoryId);
+  const currStory = await Story.getStoryById(currStoryId);
+  console.log(currStory);
 
-
-  for (let story of storyList.stories) {
-    if (story.storyId = currStoryId) {
-      currStory = story;
-    }
-  }
-
-  if (isStoryFavorite(story)) {
+  if (isStoryFavorite(currStory)) {
     $target.toggleClass("bi bi-star");
-    await currentUser.removeFavorite(story);
+    await currentUser.removeFavorite(currStory);
   } else {
     $target.toggleClass("bi bi-star-filled");
-    await currentUser.addStory(story);
+    await currentUser.addFavorite(currStory);
   }
 }
 
-$favoriteButton.on("click", handleFavoriteToggle);
+$allStoriesList.on("click", ".favorite-button", handleFavoriteToggle);
 
