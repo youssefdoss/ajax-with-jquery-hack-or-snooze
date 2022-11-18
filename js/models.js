@@ -27,6 +27,10 @@ class Story {
     const url = new URL(this.url);
     return url.host;
   }
+  /** TODO: */
+  static getStoryId(story) {
+
+  }
 }
 
 
