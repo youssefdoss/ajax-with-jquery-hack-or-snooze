@@ -24,12 +24,12 @@ function generateStoryMarkup(story) {
 
   const hostName = story.getHostName();
 
-  const filled = currentUser.isStoryFavorite(story) ? "-filled" : "";
+  const fill = currentUser.isStoryFavorite(story) ? "-fill" : "";
 
   return $(`
       <li id="${story.storyId}">
         <a href="#" class="favorite-button">
-          <i class="bi bi-star${filled}"></i>
+          <i class="bi bi-star${fill}"></i>
         </a>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -83,9 +83,12 @@ function generateFavoriteStoryMarkup() {
   $favoriteStoriesList.empty();
 
   for (let story of currentUser.favorites) {
+    console.log(currentUser.favorites);
     const $story = generateStoryMarkup(story);
     $favoriteStoriesList.append($story);
   }
+
+  $favoriteStoriesList.show();
 }
 
 /** TODO: */
@@ -98,10 +101,12 @@ async function handleFavoriteToggle(evt) {
 
 
   if (currentUser.isStoryFavorite(currStory)) {
-    $target.toggleClass("bi bi-star");
+    $target.removeClass("bi bi-star-fill")
+    $target.addClass("bi bi-star");
     await currentUser.removeFavorite(currStory);
   } else {
-    $target.toggleClass("bi bi-star-filled");
+    $target.removeClass("bi bi-star");
+    $target.addClass("bi bi-star-fill");
     await currentUser.addFavorite(currStory);
   }
 }

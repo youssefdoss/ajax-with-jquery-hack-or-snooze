@@ -53,8 +53,8 @@ $navSubmit.on("click", navSubmitClick);
 
 function navFavoritesClick() {
   console.debug("navFavoritesClick");
-  generateFavoriteStoryMarkup();
   hidePageComponents();
+  generateFavoriteStoryMarkup();
   $(".main-nav-links").show();
   $favoriteStoriesList.show();
 }

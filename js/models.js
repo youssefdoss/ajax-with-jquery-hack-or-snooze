@@ -221,8 +221,8 @@ class User {
 
   /** TODO: */
   async removeFavorite(story) {
-    this.favorites = this.favorites.filter((storyVal) => {
-      storyVal.storyId !== story.storyId;
+    this.favorites = this.favorites.filter((favorite) => {
+      favorite.storyId !== story.storyId;
     });
     await this.addOrRemoveFavoriteInApi(story, "DELETE");
   }
@@ -241,9 +241,6 @@ class User {
 
   /** TODO: */
   isStoryFavorite(story) {
-    const storyId =
-
-    this.favorites.some()
-    return this.favorites.includes(story);
+    return this.favorites.some(favorite => favorite.storyId === story.storyId);
   }
 }
