@@ -37,7 +37,18 @@ function updateNavOnLogin() {
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
+/** When a user log out, update the navbar and story page to reflect that. */
 
+function updateNavOnLogout() {
+  console.debug("updateNavOnLogout");
+  $navLogin.show();
+  $navLogOut.hide();
+  $navUserProfile.text(`${currentUser.username}`).hide();
+  putStoriesOnPage();
+  $navUserFunc.hide();
+}
+
+$navLogOut.on("click", updateNavOnLogout);
 
 /** When a user clicks submit link go to addstory form*/
 
@@ -62,4 +73,4 @@ function navFavoritesClick() {
 $navFavorites.on("click", navFavoritesClick);
 
 
-// TODO: when logged out you have to hide submit and favorites
+

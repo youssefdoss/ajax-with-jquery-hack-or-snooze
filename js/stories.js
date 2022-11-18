@@ -12,27 +12,35 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
+/** If user is logged in add star */
+function generateStarMarkup(story) {
+  if (currentUser === undefined) {
+    return "";
+  } else {
+    const fill = currentUser.isStoryFavorite(story) ? "-fill" : "";
+    return`<a href="#" class="favorite-button">
+          <i class="bi bi-star${fill}"></i>
+        </a>`
+  }
+}
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
  *
  * Returns the markup for the story.
  */
-// TODO: check if user exists before doing the piece on 27
-// TODO: lift the star generating into another function 
-// Have this function determine whether or not there is a user and if so, call the star function
+
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
   const hostName = story.getHostName();
 
-  const fill = currentUser.isStoryFavorite(story) ? "-fill" : "";
+
 
   return $(`
       <li id="${story.storyId}">
-        <a href="#" class="favorite-button">
-          <i class="bi bi-star${fill}"></i>
-        </a>
+        ${generateStarMarkup(story)}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -80,8 +88,7 @@ async function submitNewStoryAndAddToPage(evt) {
 $submitForm.on("submit", submitNewStoryAndAddToPage);
 
 /** Generates the markup for the current user's favorited stories */
-// TODO: putFavoriteStoriesOnPage is better name to be more in line
-function generateFavoriteStoryMarkup() {
+function putFavoriteStoriesOnPage() {
   console.debug("putFavoriteStoriesOnPage");
 
   $favoriteStoriesList.empty();
@@ -97,7 +104,7 @@ function generateFavoriteStoryMarkup() {
 /** Handles the user toggling favorites on stories
  * If the story is a favorite, it removes the favorite from the API and local data and updates UI.
  * If not, it adds the favorite from the API and local data and updates the UI.
- * 
+ *
  * evt: HTML element
  */
 async function handleFavoriteToggle(evt) {
@@ -106,14 +113,12 @@ async function handleFavoriteToggle(evt) {
   const currStoryId = $target.closest("li").attr("id");
 
   const currStory = await Story.getStoryById(currStoryId);
-  // TODO: toggle class instead of add and remove
+
   if (currentUser.isStoryFavorite(currStory)) {
-    $target.removeClass("bi bi-star-fill")
-    $target.addClass("bi bi-star");
+    $target.toggleClass("bi-star bi-star-fill");
     await currentUser.removeFavorite(currStory);
   } else {
-    $target.removeClass("bi bi-star");
-    $target.addClass("bi bi-star-fill");
+    $target.toggleClass("bi-star bi-star-fill");
     await currentUser.addFavorite(currStory);
   }
 }

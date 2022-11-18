@@ -17,6 +17,7 @@ const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
 const $navSubmit = $("#nav-submit");
 const $navFavorites = $("#nav-favorites");
+const $navUserFunc = $("#nav-user-func");
 
 const $favoriteButton = $(".favorite-button");
 
