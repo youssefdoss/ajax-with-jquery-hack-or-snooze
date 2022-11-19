@@ -44,6 +44,9 @@ async function start() {
   // "Remember logged-in user" and log in, if credentials in localStorage
   await checkForRememberedUser();
   await getAndShowStoriesOnStart();
+  
+  // Set default status for navbar
+  $navUserFunc.hide();
 
   // if we got a logged-in user
   if (currentUser) updateUIOnUserLogin();
